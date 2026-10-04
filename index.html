@@ -9,15 +9,21 @@
     <link href="https://fonts.googleapis.com/css2?family=Paytone+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.css" integrity="sha384-Bk5cbLkZQ5raZ0+H2/+VbfYx3WpvxvQK4zqXZr7sYODuaX7bKXoSOnipQxkaS8sv" crossorigin="anonymous">
     <style>
+        :root{
+            --main:#12100E;
+            --p : white
+        }
         body{
-            background-color: #12100E;
+            background-color: var(--main);
+            color:var(--p);
+            transition:color 1s ,background-color 1s;
         }
         nav{
             padding:10px;
             font-family: "Paytone One", sans-serif;
             font-weight: 500;
             font-style: normal;
-            color:white;
+            color:var(--p);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -29,7 +35,7 @@
         }
         .bi-list{
             
-            border:1px solid white;
+            border:1px solid var(--p);
             padding: 10px;
             border-radius: 50%;
             display: flex;
@@ -43,7 +49,7 @@
             align-items: center;
         }
         a{
-            color:white;
+            color:var(--p);
             text-decoration: none;
         }
         #menucon{
@@ -55,41 +61,59 @@
             visibility: hidden
         }
         #car{
-            border:1px solid white;
+            border:1px solid var(--p);
             border-radius: 16px;
+            position: relative;
         
         }
-        #carname,h2{
+        #carname,h2,#why{
             font-family: "Paytone One", sans-serif;
             font-weight: 500;
             font-style: normal;
         }
         small{
-            color: #d3d0d0;;
+            color: var(--p);
             font-style: italic;
             font-size: large;   
         }
         #round{
-            border:1px solid white;
+            border:1px solid var(--p);
             border-radius: 16px;
             width:fit-content;
             padding: 10px 20px;
             margin-top:10px;
         }
         .product{
-            border: 1px solid white;
+            border: 1px solid var(--p);
             margin-top: 10px;
+            transition: background-color 2s ease;
+        }
+        .product:hover{
+            background-color: var(--p);
+        }
+        #maincar{
+            transition: background-image 2s ease;
+        }
+        #theme{
+            position: absolute;
+            top:50px;
+            right:20px;
+            font-size: 30px;
+        }
+        .margin-y{
+            margin-top:10px;
+            margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
-    <header>
+    <header style="position: sticky;top:0;background-color: #12100E;">
         <nav>
-        <h2>Motors</h2>
+        <h2 style="color:var(--p)">Motors</h2>
         <div style="display: flex;gap: 20px;">
             <div style="position: relative;">
                 <i class="bi bi-list" id="menu"></i>
-                <div class="d-hidden" id="menucon" style="position: absolute;top:30px;width: 100px;margin-top:5px;background-color: #1B1814;padding: 10px;">
+                <div class="d-hidden" id="menucon" style="position: absolute;top:30px;width: 100px;margin-top:5px;background-color: #1B1814;padding: 10px;z-index: 111;">
                     <div style="display: flex;flex-direction: column;">
                         <a href="">HOME</a>
                         <a href="">LISTINGS</a>
@@ -106,21 +130,33 @@
         </nav>
     </header>
     <main>
-        <div id="car" style="padding:50px;color:white;">
-            <h1 id="carname">CABRIOLET GT 535</h1>
-            <small>Winner, AVAVA Motors Show  ·  2027</small>
+        <div id="car" style="padding:50px;color:var(--p);">
+            <h1 id="carname" style="color:var(--p)">CABRIOLET GT 535</h1>
+            <small style="color: var(--p);">Winner, AVAVA Motors Show  ·  2027</small>
             <div id="round" style="display: flex;justify-content: center;align-items: center;gap:5px;">
                 <span style="border-radius: 50%;background-color: orangered;width: 8px;height: 8px;display: inline-block;"></span>245 Vechiles Available
             </div>
-            <h2>$148,900</h2>
-            <div style="text-align: center;z-index:-1;font-family:'Paytone One';font-size: clamp(1.5rem,10vw,15rem);color:rgba(250, 246, 246, 0.1)">THE COLLECTION</div>
-            <div style="z-index: 1;background-image: url('https://demo.gridgum.com/avavamotors/car-dealer/assets/img/cabriolet-hero.webp');background-size: contain;background-position: center center;height: 200px;background-repeat: no-repeat;position: relative;bottom:60px"></div>
+            <h2 style="color:var(--p)">$148,900</h2>
+            <div style="text-align: center;z-index:-1;font-family:'Paytone One';font-size: clamp(1.5rem,10vw,15rem);color:rgba(250, 246, 246, 0.1)" id="collection">THE COLLECTION</div>
+            <div id="maincar" style="z-index: 1;background-image: url('https://demo.gridgum.com/avavamotors/car-dealer/assets/img/cabriolet-hero.webp');background-size: contain;background-position: center center;height: 200px;background-repeat: no-repeat;position: relative;bottom:60px"></div>
             <div style="display: flex;justify-content: space-around;flex-wrap: wrap;">
-                <div class="product" style="background-image: url('https://static.vecteezy.com/system/resources/previews/045/547/204/non_2x/white-tesla-car-free-png.png');height: 100px;width: 100px;background-position: center center;background-repeat: no-repeat;background-size: contain;"></div>
-                <div class="product" style="background-image: url('https://pngimg.com/uploads/kia/kia_PNG81.png');height: 100px;width: 100px;background-position: center center;background-size: contain;background-repeat: no-repeat;"></div>
-                <div class="product" style="background-image: url('https://demo.gridgum.com/avavamotors/car-dealer/assets/img/cabriolet-hero.webp');height: 100px;width: 100px;background-position: center center;background-size: contain;background-repeat: no-repeat;"></div>
+                <div class="product" name="one" style="background-image: url('https://freepngimg.com/thumb/car/4-2-car-png-hd.png');height: 100px;width: 100px;background-position: center center;background-repeat: no-repeat;background-size: contain;"></div>
+                <div class="product" name="two" style="background-image: url('https://pngimg.com/uploads/kia/kia_PNG81.png');height: 100px;width: 100px;background-position: center center;background-size: contain;background-repeat: no-repeat;"></div>
+                <div class="product" name="three" style="background-image: url('https://demo.gridgum.com/avavamotors/car-dealer/assets/img/cabriolet-hero.webp');height: 100px;width: 100px;background-position: center center;background-size: contain;background-repeat: no-repeat;"></div>
+            </div>
+            <div id="theme">
+                <i class="bi bi-sun" id="mode"></i>
             </div>
         </div>
+        <section id="why">
+            <div style="border:1px solid var(--p);border-radius: 16px;width: fit-content;margin: 10px auto;padding: 10px;">
+                <span style="width: 8px;height: 8px;background-color: orangered;border-radius: 50%;display: inline-block;margin-right:5px;"></span>Why Motors?
+            </div>
+            <h1 class="margin-y" style="text-align: center;">
+                Built around the driver
+            </h1>
+            <small style="font-family: 'Courier New', Courier, monospace;text-align: center;font-size: 15px;display: block;margin: auto;">Four commitments that make buying with Motors different from any other dealership.</small>
+        </section>
     </main>
     <footer></footer>
     <script>
@@ -132,6 +168,45 @@
             }else{
                 menu_container.classList.add('d-hidden')
             }
+        })
+    </script>
+    <script>
+        const cars = {
+            'one':'https://freepngimg.com/thumb/car/4-2-car-png-hd.png',
+            'two':'https://pngimg.com/uploads/kia/kia_PNG81.png',
+            'three':'https://demo.gridgum.com/avavamotors/car-dealer/assets/img/cabriolet-hero.webp'
+        }
+        const main = document.querySelector('#maincar')
+        const products = document.querySelectorAll('.product')
+        products.forEach((v)=>{
+            v.addEventListener('click',function(){
+                main.style.backgroundImage=`url(${cars[this.getAttribute('name')]})`
+                if(cars[this.getAttribute('name')]=='one' || cars[this.getAttribute('name')]=='two' ){
+                    main.style.height='400px';
+                }
+            })
+        })
+    </script>
+    <script>
+        const mode = document.querySelector('#mode');
+        const root = document.documentElement
+        const collection = document.querySelector('#collection')
+        mode.addEventListener('click',function(){
+            if (mode.classList.contains('bi-sun')){
+                mode.classList.remove('bi-sun');
+                mode.classList.add('bi-moon');
+                root.style.setProperty('--main','white');
+                root.style.setProperty('--p','#12100E')
+                collection.style.setProperty('color','rgba(3, 2, 2, 0.9)')
+            }
+            else if(mode.classList.contains('bi-moon')){
+                mode.classList.remove('bi-moon');
+                mode.classList.add('bi-sun');
+                root.style.setProperty('--p','white');
+                root.style.setProperty('--main','#12100E')
+                collection.style.setProperty('color','rgba(250, 246, 246, 0.1)')
+            }
+            
         })
     </script>
 </body>
