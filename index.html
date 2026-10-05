@@ -11,10 +11,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <style>
         :root{
             --main:#12100E;
             --p : white
+        }
+        #collection h2,h3{
+            color:white
         }
         body{
             background-color: var(--main);
@@ -104,8 +108,8 @@
             font-size: 30px;
         }
         .margin-y{
-            margin-top:10px;
-            margin-bottom: 10px;
+            margin-top:20px;
+            margin-bottom: 20px;
         }
         div a{
             color:white
@@ -120,6 +124,7 @@
             max-width:300px;
             height: 300px;
             font-family: "Roboto Condensed", sans-serif;
+            transition: transform 2s ease;
 
         }
         .card-e{
@@ -133,11 +138,49 @@
             max-width:300px;
             height: 300px;
             color:black;
+            transition: transform 2s ease;
+        }
+        .card-e-test{
+            border-radius:10% ;
+            box-shadow: 1px 1px 3px black;
+            background-color: white;
+            font-family: "Roboto Condensed", sans-serif;
+            padding:32px 30px;
+            width:300px;
+            display: flex;
+            flex-direction: column;
+            color:black;
+            transition: transform 2s ease;
+            padding: 10px;
+            
+        }
+        #ticker-track{
+            animation: ticker linear 40s infinite;
+            animation-delay: -40s;
+            display: flex;
+            width: max-content;
+            gap:20px;
+        }
+        #ticker-track:hover{
+            animation-play-state: paused;
+        }
+        
+        .card-e-test q{
+            margin-top: 10px;
+        }
+        #testi{
+            display: flex;
+            gap:5px
         }
         .cards{
             display: flex;
             justify-content: space-around;
+            gap:20px;
 
+            
+        }
+        .card-e:hover,.card-o:hover{
+            transform: scale(1.1);
         }
         .icon-ci{
             background-color: orangered;
@@ -149,10 +192,34 @@
             align-items: center;
             
         }
+        .bi-star-fill{
+            color:yellow;
+
+        }
+        #collection div:hover{
+            background-color: rgba(0,0,0,0.5);
+        }
+        @media(max-width:700px) {
+            .cards{
+                flex-wrap: wrap;
+            }
+            #collection{
+                display: none;
+
+            }
+        }
+        @keyframes ticker{
+            0%{
+                transform: translateX(0);
+            }
+            100%{
+                transform: translateX(-50%);
+            }
+        }
     </style>
 </head>
 <body>
-    <header style="position: sticky;top:0;background-color: var(--main);">
+    <header style="position: sticky;top:0;background-color: var(--main);z-index: 9999;">
         <nav>
         <h2 style="color:var(--p)">Motors</h2>
         <div style="display: flex;gap: 20px;">
@@ -217,11 +284,77 @@
                         One honest price with the full service history and finance terms shown up front. What you see is what you pay.
                     </p>
                 </div>
+                <div class="card-o">
+                    <div class="icon-ci"><i class="bi bi-diamond"></i></div>
+                    <h1>Curated Collection</h1>
+                    <p>
+                        Only the top 3% of the vehicles we inspect ever reach our showroom floor — no filler, no compromises.
+                    </p>
+                </div>
+
+            <div class="card-e">
+                    <div class="icon-ci"><i class="bi bi-tag"></i></div>
+                    <h1>Transparent Pricing</h1>
+                    <p>
+                        One honest price with the full service history and finance terms shown up front. What you see is what you pay.
+                    </p>
+                </div>
             </div>
-        </div>
+            
+        </section>
+        <section id="reviews">
+            <div style="border:1px solid var(--p);border-radius: 16px;width: fit-content;margin: 10px auto;padding: 10px;">
+                <span style="width: 8px;height: 8px;background-color: orangered;border-radius: 50%;display: inline-block;margin-right:5px;"></span>Testimonials
+            </div>
+            <div id="testi" style="overflow: hidden;">
+                <div id="ticker-track">
+    
+                </div>
+            </div>
+
+        </section>
+        <section id="mapk" class="margin-y">
+            <div style="border:1px solid var(--p);border-radius: 16px;width: fit-content;margin: 10px auto;padding: 10px;">
+                <span style="width: 8px;height: 8px;background-color: orangered;border-radius: 50%;display: inline-block;margin-right:5px;"></span>Where Are We?
+            </div>
+            <div id="map" style="height: 300px;width: 300px;margin: auto;"></div>
+        </section>
+        <section id="collection">
+            <div style="border:1px solid var(--p);border-radius: 16px;width: fit-content;margin: 10px auto;padding: 10px;">
+                <span style="width: 8px;height: 8px;background-color: orangered;border-radius: 50%;display: inline-block;margin-right:5px;"></span>Our Collection
+            </div>
+            <h1 style="font-family: 'Paytone One';text-align: center;">Featured Listings</h1>
+            <div style="margin: auto;width: 600px;">
+                <div style="display: flex;">
+                    <div style="display: flex;flex-direction: column;justify-content: end;font-family: 'Paytone One';flex-grow:1;flex-shrink: 0;background-image: url('https://demo.gridgum.com/avavamotors/car-dealer/assets/img/cars/featured/mercedes-amg-gt-63-card-16x9.webp');height: 300px;background-size: cover;background-repeat: no-repeat;background-position: center center;width: 300px;">
+                        <h2 style="margin: 0;margin-left: 5px;">AMG GT 63</h2>
+                        <h2 style="margin: 0;margin-left: 5px;">$178,000</h2>
+                    </div>
+                    <div style="display: flex;flex-wrap: wrap;flex-shrink: 1;">
+                    <div style="display: flex;flex-direction: column;justify-content: end;font-family: 'Paytone One';;background-image: url('https://demo.gridgum.com/avavamotors/car-dealer/assets/img/cars/featured/mercedes-amg-gt-63-card-16x9.webp');height: 150px;background-size: cover;background-repeat: no-repeat;background-position: center center;width: 150px;">
+                        <h3 style="margin: 0;margin-left: 5px;">AMG GT 63</h3>
+                        <h3 style="margin: 0;margin-left: 5px;">$178,000</h3>
+                    </div>
+                    <div style="display: flex;flex-direction: column;justify-content: end;font-family: 'Paytone One';;background-image: url('https://demo.gridgum.com/avavamotors/car-dealer/assets/img/cars/featured/audi-rs-e-tron-gt-card-16x9.webp');height: 150px;background-size: cover;background-repeat: no-repeat;background-position: center center;width: 150px;">
+                        <h3 style="margin: 0;margin-left: 5px;">RS e-tron </h3>
+                        <h3 style="margin: 0;margin-left: 5px;">$178,000</h3>
+                    </div>
+                    <div style="display: flex;flex-direction: column;justify-content: end;font-family: 'Paytone One';;background-image: url('https://demo.gridgum.com/avavamotors/car-dealer/assets/img/cars/featured/bentley-continental-gt-card-16x9.webp');height: 150px;background-size: cover;background-repeat: no-repeat;background-position: center center;width: 150px;">
+                        <h3 style="margin: 0;margin-left: 5px;">Contiental GT</h3>
+                        <h3 style="margin: 0;margin-left: 5px;">$178,000</h3>
+                    </div>
+                    <div style="display: flex;flex-direction: column;justify-content: end;font-family: 'Paytone One';;background-image: url('https://demo.gridgum.com/avavamotors/car-dealer/assets/img/cars/featured/range-rover-sport-card-16x9.webp');height: 150px;background-size: cover;background-repeat: no-repeat;background-position: center center;width: 150px;">
+                        <h3 style="margin: 0;margin-left: 5px;">Range Rover</h3>
+                        <h3 style="margin: 0;margin-left: 5px;">$178,000</h3>
+                    </div>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
-    <footer></footer>
+    <footer>
+        <p style="text-align: center;font-family: 'Paytone One'">Hamoda Elemary &copy;</p>
+    </footer>
     <script>
         const menu = document.querySelector('#menu');
         menu.addEventListener('click',()=>{
@@ -256,6 +389,7 @@
         const collection = document.querySelector('#collection')
         const cardso = document.querySelectorAll('.card-o')
         const cardse = document.querySelectorAll('.card-e')
+
         mode.addEventListener('click',function(){
             if (mode.classList.contains('bi-sun')){
                 mode.classList.remove('bi-sun');
@@ -263,11 +397,13 @@
                 root.style.setProperty('--main','white');
                 root.style.setProperty('--p','#12100E')
                 collection.style.setProperty('color','rgba(3, 2, 2, 0.9)')
-                cardso.forEach(function(){
-                    this.style.backgroundColor = 'white'
-                    this.style.color = ' #1B1814'
-                    
-                    
+                cardso.forEach(function(e){
+                    e.style.backgroundColor = 'white';
+                    e.style.color = ' #1B1814';
+                })
+                cardse.forEach(function(e){
+                    e.style.backgroundColor = 'black';
+                    e.style.color = 'white';
                 })
 
             }
@@ -276,10 +412,56 @@
                 mode.classList.add('bi-sun');
                 root.style.setProperty('--p','white');
                 root.style.setProperty('--main','#12100E')
-                collection.style.setProperty('color','rgba(250, 246, 246, 0.1)')
+                collection.style.setProperty('color','rgba(250, 246, 246, 0.1)');
+                cardso.forEach(function(e){
+                    e.style.backgroundColor='#1B1814';
+                    e.style.color='white'
+                })
+                cardse.forEach(function(e){
+                    e.style.backgroundColor = 'white';
+                    e.style.color = '#1B1814';
+                })
             }
             
         })
+    </script>
+    <script>
+        const mainparent= document.querySelector('#ticker-track')
+        fetch('https://jsonplaceholder.typicode.com/users')
+        .then(response=>response.json())
+        .then(data=>{
+            data.forEach((v)=>{
+                mainparent.innerHTML+=`
+                 <div class="card-e-test" >
+                    <div class="d-flex">
+
+                    <span class="bi bi-star-fill"></span>
+                    <span class="bi bi-star-fill"></span>
+                    <span class="bi bi-star-fill"></span>
+                    <span class="bi bi-star-fill"></span>
+                    <span class="bi bi-star-fill"></span>       
+                    
+                </div>
+                <q style="padding: 10px 0;">They walked me through every feature. Customer for life.</q>
+                <p>${v['name']}</p>
+                </div>
+                `
+            })    
+        })
+    </script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+    <script>
+const map = L.map('map').setView([31.4165 ,31.5165 ], 13);
+
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+const marker = L.marker([31.4165, 31.8133]).addTo(map);
+marker.bindPopup("<b>Welcome To Motors</b>").openPopup();
+
     </script>
 </body>
 </html> 
